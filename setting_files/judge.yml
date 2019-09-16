@@ -1,0 +1,21 @@
+id: ExampleJudge
+key: "-t_qBN}_zr@WF_O(j>A]9:JR,-]@FMPN38(9Y:CDD]`ZT.|dYdH03q#;cN8?5s(gvu0LeSBMy3cc;06)pF)<nX]C=.Us^{#7w!9:"
+problem_storage_root: 
+  - /home/kitakaze/dmoj/problems
+runtime:
+  as_x86: /usr/bin/as
+  ld_x86: /usr/bin/ld
+  sed: /bin/sed
+  awk: /usr/bin/awk
+  gcc: /usr/bin/gcc
+  g++: /usr/bin/g++
+  g++11: /usr/bin/g++
+  g++14: /usr/bin/g++
+#  java: /usr/bin/java
+#  javac: /usr/bin/javac
+#  java8: /usr/bin/java
+#  javac8: /usr/bin/javac
+  python: /usr/bin/python
+  python3: /usr/bin/python3
+  perl: /usr/bin/perl
+#  ruby21: /usr/bin/ruby
