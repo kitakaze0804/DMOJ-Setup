@@ -63,7 +63,7 @@ git submodule update
 - [config.js](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/config.js)
 - [wsevent.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/wsevent.conf)
 
-また、[localsetting.py](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/localsetting.py)をsite内のdmojに配置し、ファイル内の`kitakaze`の部分を自分のユーザー名に変更してください。
+また、[local_setting.py](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/local_setting.py)をsite内のdmojに配置し、ファイル内の`kitakaze`の部分を自分のユーザー名に変更してください。
 ```
 49: DMOJ_PROBLEM_DATA_ROOT = '/home/kitakaze/dmoj/problems'
 124: STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
