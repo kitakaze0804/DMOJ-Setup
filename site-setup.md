@@ -136,8 +136,8 @@ sudo npm install qu ws simplesets
 sudo pip3 install websocket-client
 sudo pip3 install django_select2
 ```
-また、wsevent.confをsupervisorにコピーして supervisorを再起動します。  
-**２・３行目のフォルダパスを直してください。**
+また、wsevent.confをsupervisorにコピーして supervisordを再起動します。  
+**wsevent.confの２・３行目のフォルダパスを直してください。**
 ```
 sudo cp wsevent.conf /etc/supervisor/conf.d/
 sudo supervisorctl reload
@@ -145,4 +145,5 @@ sudo supervisorctl status
 ```
 
 ## サイトの確認
-webブラウザを開き、アドレスバーに`localhost`（127.0.0.1と同じ）と入力します。サイトが表示されれば成功！管理者ユーザでログインできることを確認してください。
+webブラウザを開き、アドレスバーに`localhost`（127.0.0.1と同じ）と入力します。サイトが表示されれば成功！  
+管理者ユーザでログインできることを確認してください。
