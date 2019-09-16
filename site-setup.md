@@ -59,7 +59,7 @@ git submodule update
 - [site.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/site.conf)
 - [bridged.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/bridged.conf)
 - [uwsgi.ini](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/uwsgi.ini)
-- [ngix.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/ngix.conf)
+- [nginx.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/nginx.conf)
 - [config.js](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/config.js)
 - [wsevent.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/wsevent.conf)
 
@@ -118,15 +118,15 @@ sudo supervisorctl status
 ```
 statusがRUNNINGとなっていたら、正常です。
 
-## ngixのセットアップ
-ngix.confを次のコマンドで、`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
+## nginxのセットアップ
+nginx.confを次のコマンドで、`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
 **ファイル内の21行目、25行目、40行目のパスの"kitakaze"の部分を自分のユーザー名に書き換えてください。**
 
 ```
 sudo cp nginx.conf /etc/nginx/sites-enabled/default
 sudo service nginx reload
 ```
-ngixサービスを再起動して、エラーが出なければ成功です。
+nginxサービスを再起動して、エラーが出なければ成功です。
 
 ## イベントサーバーの構築
 config.jsをwebsocketフォルダに配置し、必要なパッケージをインストールします。
