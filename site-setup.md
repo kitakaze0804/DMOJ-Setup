@@ -2,7 +2,7 @@
 ## 必要なパッケージのダウンロード
 必要なソフトウェアをすべてダウンロードします。
 ```
-sudo apt install git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx
+sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン８を使用します。ほかのバージョンでも動くかもしれません。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
