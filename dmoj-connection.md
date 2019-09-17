@@ -1,9 +1,6 @@
 # SiteとJudgeの接続方法
 ここでは、SiteとJudgeを通信可能にする方法（Judgeを動かす方法）について説明します。
-## 問題を格納するフォルダの作成
-```
-mkdir ~/dmoj/problems
-```
+
 ## judge.ymlのダウンロードと修正
 [judge.yml](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/judge.yml)を`~dmoj/judge`にダウンロードします。  
 ４行目の`kitakaze`を自分のユーザー名に変更します。
@@ -56,7 +53,7 @@ http://localhost に移動して、上のメニューから`problem`を選択し
 ![image5](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/images/judge_connection5.png)  
 
 次の場所にある`aplusb.zip`を選択します。 
- ~/dmoj/docs/problem_examples/standard/aplusb  
+~/dmoj/docs/problem_examples/standard/aplusb  
 ![image6](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/images/judge_connection6.png)  
 
 ファイルを選択した状態で一度、`Submit`ボタンを押します。そのあとは、写真の通りにテストケースを設定します。右下にある`add new case`をクリックすると、テストケースを追加することができます。  
