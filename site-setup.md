@@ -53,6 +53,11 @@ cd site/
 git submodule init
 git submodule update
 ```
+## 問題を格納するフォルダの作成
+ここで、問題を格納するフォルダも作ってしまいます。
+```
+mkdir ~/dmoj/problems
+```
 
 ## 設定ファイルについて
 以下のファイルをダウンロードして、`~/dmoj/site`直下に保存してください。
