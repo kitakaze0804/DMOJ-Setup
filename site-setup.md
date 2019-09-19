@@ -2,7 +2,7 @@
 ## 必要なパッケージのダウンロード
 必要なソフトウェアをすべてダウンロードします。
 ```
-sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev　supervisor　nginx
+sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン８を使用します。ほかのバージョンでも動くかもしれません。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
@@ -73,11 +73,15 @@ mkdir ~/dmoj/problems
 49: DMOJ_PROBLEM_DATA_ROOT = '/home/kitakaze/dmoj/problems'
 124: STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
 ```
+
 ## モジュールのインストール
 次はモジュールをインストールしていきます。必ず`sudo`で実行することと、`pip`ではなくて、`pip3`を使うようにしましょう。
+### 注意
+2019/9/19現在、requirements.txtにある`django-pagedown`をそのままインストールすると、`django-pagedown2.0.3`がインストールされ、正常に動きません。そこで、requirements.txtの４行目にある`django-pagedown`を`django-pagedown=1.0.6`に変更してください。
 ```
 sudo pip3 install -r requirements.txt
 sudo pip3 install mysqlclient
+sudo pip3 install websocket-client
 python3 manage.py check
 ```
 最後のコマンドは**sudoをつけずに**実行します。エラーが出なければ成功です。
@@ -100,12 +104,6 @@ python3 manage.py loaddata language_small
 python3 manage.py loaddata demo
 ```
 
-## 管理者ユーザの作成
-管理者ユーザを作成します。メールアドレスは空のままで、結構です。
-```
-python3 manage.py createsuperuser
-```
-
 ## uWSGIのセットアップ
 uwsgiをインストールし、設定ファイルをコピーします。  
 **site.conf,bridged.confの２・３行目にあるホームディレクトリのパスの"kitakaze"の部分を自分のユーザー名に書き換えてください。**  
@@ -115,14 +113,6 @@ sudo pip3 install uwsgi
 sudo cp site.conf bridged.conf /etc/supervisor/conf.d/
 ```
 
-## Supervisordのインストールと起動
-以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  
-```
-sudo apt install -y supervisor
-sudo supervisorctl update
-sudo supervisorctl status
-```
-statusがRUNNINGとなっていたら、正常です。
 
 ## nginxのセットアップ
 nginx.confを修正して、下のコマンドで`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
@@ -139,15 +129,27 @@ config.jsをwebsocketフォルダに配置し、必要なパッケージをイ�
 ```
 cp config.js websocket/
 sudo npm install qu ws simplesets
-sudo pip3 install websocket-client
 sudo pip3 install django_select2==6.3.1
 ```
 また、wsevent.confをsupervisorにコピーして supervisordを再起動します。  
 **wsevent.confの２・３行目のフォルダパスを直してください。**
 ```
 sudo cp wsevent.conf /etc/supervisor/conf.d/
-sudo supervisorctl reload
+```
+
+## Supervisordの再起動
+以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  
+```
+sudo apt install -y supervisor
+sudo supervisorctl update
 sudo supervisorctl status
+```
+statusがRUNNINGとなっていたら、正常です。
+
+## 管理者ユーザの作成
+管理者ユーザを作成します。メールアドレスは空のままで、結構です。
+```
+python3 manage.py createsuperuser
 ```
 
 ## サイトの確認
