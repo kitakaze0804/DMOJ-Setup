@@ -140,7 +140,6 @@ sudo cp wsevent.conf /etc/supervisor/conf.d/
 ## Supervisordの再起動
 以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  
 ```
-sudo apt install -y supervisor
 sudo supervisorctl update
 sudo supervisorctl status
 ```
