@@ -2,7 +2,7 @@
 ## 必要なパッケージのダウンロード
 必要なソフトウェアをすべてダウンロードします。
 ```
-sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev
+sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev　supervisor　nginx
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン８を使用します。ほかのバージョンでも動くかもしれません。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
@@ -116,7 +116,7 @@ sudo cp site.conf bridged.conf /etc/supervisor/conf.d/
 ```
 
 ## Supervisordのインストールと起動
-以下のコマンドで、supervisordをインストールして起動し、正常に動作することを確認します。  
+以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  
 ```
 sudo apt install -y supervisor
 sudo supervisorctl update
@@ -125,11 +125,7 @@ sudo supervisorctl status
 statusがRUNNINGとなっていたら、正常です。
 
 ## nginxのセットアップ
-まず最初にnginxをインストールします。
-```
-sudo apt install -y nginx
-```
-次に、nginx.confを下のコマンドで、`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
+nginx.confを修正して、下のコマンドで`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
 **ファイル内の21行目、25行目、40行目のパスの"kitakaze"の部分を自分のユーザー名に書き換えてください。**
 
 ```
