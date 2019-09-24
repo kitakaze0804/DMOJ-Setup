@@ -17,7 +17,7 @@ DEBUG = True  # Change to False once you are done with runserver testing.
 
 # Uncomment and set to the domain names this site is intended to serve.
 # You must do this once you set DEBUG to False.
-#ALLOWED_HOSTS = ['dmoj.ca']
+ALLOWED_HOSTS = ['*']
 
 # Optional apps that DMOJ can make use of.
 INSTALLED_APPS += (
@@ -28,7 +28,8 @@ INSTALLED_APPS += (
 # Documentation: <https://docs.djangoproject.com/en/1.11/topics/cache/>
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
     }
 }
 
@@ -55,7 +56,7 @@ DMOJ_PROBLEM_DATA_ROOT = '/home/kitakaze/dmoj/problems'
 # Internationalization.
 # Documentation: <https://docs.djangoproject.com/en/1.11/topics/i18n/>
 LANGUAGE_CODE = 'en-ca'
-DEFAULT_USER_TIME_ZONE = 'America/Toronto'
+DEFAULT_USER_TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -147,7 +148,7 @@ TERMS_OF_SERVICE_URL = '//dmoj.ca/tos' # Use a flatpage.
 BRIDGED_JUDGE_ADDRESS = [('localhost', 9999)]
 
 # The bridged daemon bind address and port to communicate with the site.
-#BRIDGED_DJANGO_ADDRESS = [('localhost', 9998)]
+BRIDGED_DJANGO_ADDRESS = [('localhost', 9998)]
 
 ## DMOJ features.
 # Set to True to enable full-text searching for problems.
@@ -179,8 +180,8 @@ EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
 # i.e. the path to /channels/ exposed by the daemon, through whatever proxy setup you have.
 
 # Using our standard nginx configuration, these should be.
-EVENT_DAEMON_GET = 'ws://host/event/'
-EVENT_DAEMON_GET_SSL = 'wss://host/event/'  # Optional
+EVENT_DAEMON_GET = 'ws://127.0.0.1/event/'
+#EVENT_DAEMON_GET_SSL = 'wss://host/event/'  # Optional
 EVENT_DAEMON_POLL = '/channels/'
 
 # If you would like to use the AMQP-based event server from <https://github.com/DMOJ/event-server>,
