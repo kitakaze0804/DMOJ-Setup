@@ -2,7 +2,7 @@
 ## 必要なパッケージのダウンロード
 必要なソフトウェアをすべてダウンロードします。
 ```
-sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx
+sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx memcached
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン８を使用します。ほかのバージョンでも動くかもしれません。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
@@ -82,10 +82,11 @@ mkdir ~/dmoj/problems
 sudo pip3 install -r requirements.txt
 sudo pip3 install mysqlclient
 sudo pip3 install websocket-client
+sudo pip3 install django_select2==6.3.1
+sudo pip3 install python-memcached
 python3 manage.py check
 ```
 最後のコマンドは**sudoをつけずに**実行します。エラーが出なければ成功です。
-
 ## サイトのコンパイル
 いよいよスタイルシートをコンパイルします。
 ```
@@ -129,7 +130,6 @@ config.jsをwebsocketフォルダに配置し、必要なパッケージをイ�
 ```
 cp config.js websocket/
 sudo npm install qu ws simplesets
-sudo pip3 install django_select2==6.3.1
 ```
 また、wsevent.confをsupervisorにコピーして supervisordを再起動します。  
 **wsevent.confの２・３行目のフォルダパスを直してください。**
