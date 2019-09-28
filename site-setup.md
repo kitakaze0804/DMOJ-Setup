@@ -1,8 +1,8 @@
 # Siteのセットアップ
 ## 必要なパッケージのダウンロード
-必要なソフトウェアをすべてダウンロードします。
+必要なソフトウェアをすべてダウンロードします。[*](https://github.com/DMOJ/site/issues/816)
 ```
-sudo apt install -y git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx memcached
+sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx memcached
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン８を使用します。ほかのバージョンでも動くかもしれません。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
@@ -68,7 +68,7 @@ mkdir ~/dmoj/problems
 - [config.js](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/config.js)
 - [wsevent.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/wsevent.conf)
 
-また、[local_settings.py](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/local_settings.py)をsite内のdmojに配置し、ファイル内の`kitakaze`の部分を自分のユーザー名に変更してください。
+また、[local_settings.py](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/local_settings.py)をsite内のdmojに配置し、ファイル内の`kitakaze`の部分を自分のユーザー名に変更してください。[*](https://github.com/DMOJ/site/issues/1037)
 ```
 49: DMOJ_PROBLEM_DATA_ROOT = '/home/kitakaze/dmoj/problems'
 124: STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
@@ -77,7 +77,7 @@ mkdir ~/dmoj/problems
 ## モジュールのインストール
 次はモジュールをインストールしていきます。必ず`sudo`で実行することと、`pip`ではなくて、`pip3`を使うようにしましょう。
 ### 注意
-2019/9/19現在、requirements.txtにある`django-pagedown`をそのままインストールすると、`django-pagedown2.0.3`がインストールされ、正常に動きません。そこで、requirements.txtの４行目にある`django-pagedown`を`django-pagedown=1.0.6`に変更してください。
+2019/9/19現在、requirements.txtにある`django-pagedown`をそのままインストールすると、`django-pagedown2.0.3`がインストールされ、正常に動きません。そこで、requirements.txtの４行目にある`django-pagedown`を`django-pagedown==1.0.6`に変更してください。[*](https://pypi.org/project/django-pagedown/)
 ```
 sudo pip3 install -r requirements.txt
 sudo pip3 install mysqlclient
