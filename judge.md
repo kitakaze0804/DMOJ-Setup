@@ -10,7 +10,7 @@ git submodule init
 git submodule update
 ```
 ## 必要なパッケージのインストール
-libseccompがないと、ビルド時にヘッダーファイルのエラーが出ます。
+libseccompがないと、ビルド時にヘッダーファイルのエラーが出ます。[☆](https://github.com/DMOJ/judge/issues/483)
 ```
 sudo apt install -y libseccomp-dev
 sudo pip3 install -r requirements.txt
