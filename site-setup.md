@@ -5,7 +5,7 @@
 sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx memcached
 ```
 ## Nodejsのダウンロードとインストール
-ここでは、バージョン11を使用します。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
+ここでは、バージョン12を使用します。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
 ```
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install -y nodejs
