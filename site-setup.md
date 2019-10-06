@@ -5,13 +5,20 @@
 sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx memcached
 ```
 ## Nodejsのダウンロードとインストール
-ここでは、バージョン８を使用します。ほかのバージョンでも動くかもしれません。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
+ここでは、バージョン11を使用します。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
+```
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo npm install -g  sass postcss-cli autoprefixer
+```
+<!--
+古い方法
 ```
 wget -O- https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt install -y nodejs
 sudo npm install -g --unsafe-perm=true sass pleeease-cli
 ```
-
+-->
 ## MySQLの設定
 必ずスーパーユーザーとして実行してください。
 ```
@@ -76,8 +83,10 @@ mkdir ~/dmoj/problems
 
 ## モジュールのインストール
 次はモジュールをインストールしていきます。必ず`sudo`で実行することと、`pip`ではなくて、`pip3`を使うようにしましょう。
+<!--古い情報
 ### 注意
 2019/9/19現在、requirements.txtにある`django-pagedown`をそのままインストールすると、`django-pagedown2.0.3`がインストールされ、正常に動きません。そこで、requirements.txtの４行目にある`django-pagedown`を`django-pagedown==1.0.6`に変更してください。[*](https://pypi.org/project/django-pagedown/)
+-->
 ```
 sudo pip3 install -r requirements.txt
 sudo pip3 install mysqlclient
@@ -138,10 +147,11 @@ sudo cp wsevent.conf /etc/supervisor/conf.d/
 ```
 
 ## Supervisordの再起動
-以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  
+以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  また、nginxももう一度再起動しておきます。
 ```
 sudo supervisorctl update
 sudo supervisorctl status
+sudo service nginx reload
 ```
 statusがRUNNINGとなっていたら、正常です。
 
