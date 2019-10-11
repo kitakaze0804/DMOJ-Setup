@@ -2,14 +2,14 @@
 ここでは、SiteとJudgeを通信可能にする方法（Judgeを動かす方法）について説明します。
 
 ## judge.ymlのダウンロードと修正
-[judge.yml](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/judge.yml)を`~dmoj/judge`にダウンロードします。  
+[judge.yml](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/judge.yml)を`~/dmoj/judge`にダウンロードします。  
 ４行目の`kitakaze`を自分のユーザー名に変更します。
 ```
 3: problem_storage_root: 
 4:   - /home/kitakaze/dmoj/problems
 ```
 ## 設定ファイルの修正とコピー
-[dmoj.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/dmoj.conf)を`~dmoj/judge`直下に置きます。  
+[dmoj.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/dmoj.conf)を`~/dmoj/judge`直下に置きます。  
 2行目にある`kitakaze`を自分のユーザー名に変更します。
 ```
 2: command=dmoj -c /home/kitakaze/dmoj/judge/judge.yml 127.0.0.1
