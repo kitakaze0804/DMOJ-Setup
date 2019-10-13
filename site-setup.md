@@ -89,8 +89,7 @@ mkdir ~/dmoj/problems
 -->
 ```
 sudo pip3 install -r requirements.txt
-sudo pip3 install mysqlclient
-sudo pip3 install websocket-client
+sudo pip3 install mysqlclient websocket-client sqlparse
 sudo pip3 install django_select2==6.3.1
 sudo pip3 install python-memcached
 python3 manage.py check
@@ -146,19 +145,21 @@ sudo npm install qu ws simplesets
 sudo cp wsevent.conf /etc/supervisor/conf.d/
 ```
 
-## Supervisordの再起動
-以下のコマンドで、supervisordを再起動し、正常に動作することを確認します。  また、nginxももう一度再起動しておきます。
+## Supervisordの更新
+以下のコマンドで、supervisordを更新し、正常に動作することを確認します。  
 ```
 sudo supervisorctl update
 sudo supervisorctl status
-sudo service nginx reload
 ```
 statusがRUNNINGとなっていたら、正常です。
 
 ## 管理者ユーザの作成
 管理者ユーザを作成します。メールアドレスは空のままで、結構です。
+その後、SupervisorとNginxを再起動します。
 ```
 python3 manage.py createsuperuser
+sudo service nginx restart
+sudo supervisorctl reload
 ```
 
 ## サイトの確認
