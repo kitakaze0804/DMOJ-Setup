@@ -46,7 +46,7 @@ sudo mysql -u root -p
 次に２つのコマンドで、dmojのデータベースを登録し、終了する。（セミコロンで分けて入力）
 ```
 CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY '<password>';
+GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'%' IDENTIFIED BY '<password>';
 exit
 ```
 
