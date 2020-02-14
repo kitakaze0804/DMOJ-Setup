@@ -44,7 +44,7 @@ sudo mysql_secure_installation
 と聞かれるので、yキーを押して許可します。 
 
 新しいパスワードの入力を求められるので、パスワードを決め、入力する。（ここでは、`dmoj`としました。）  
-再度パスワードを入力し、エンターを押す。
+再度パスワードを入力し、エンターを押す。  
 下記の質問には、yキーで許可する。
 
 > Remove anonymous users?  
@@ -83,17 +83,17 @@ mkdir ~/dmoj/problems
 
 ## 設定ファイルについて
 以下のファイルをダウンロードして、`~/dmoj/site`直下に保存してください。
-- [site.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/site.conf)
-- [bridged.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/bridged.conf)
-- [uwsgi.ini](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/uwsgi.ini)
-- [nginx.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/nginx.conf)
-- [config.js](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/config.js)
-- [wsevent.conf](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/wsevent.conf)
+- [site.conf](setting-files/site.conf)
+- [bridged.conf](setting-files/bridged.conf)
+- [uwsgi.ini](setting-files/uwsgi.ini)
+- [nginx.conf](setting-files/nginx.conf)
+- [config.js](setting-files/config.js)
+- [wsevent.conf](setting-files/wsevent.conf)
 
-また、[local_settings.py](https://raw.githubusercontent.com/kitakaze0804/DMOJ-Setting/master/setting-files/local_settings.py)をsite内のdmojに配置し、ファイル内の`kitakaze`の部分を自分のユーザー名に変更してください。[*](https://github.com/DMOJ/site/issues/1037)
+また、[local_settings.py](setting-files/local_settings.py)をsite内のdmojに配置し、ファイル内の`root`の部分を自分のユーザー名に変更してください。[*](https://github.com/DMOJ/site/issues/1037)
 ```
-49: DMOJ_PROBLEM_DATA_ROOT = '/home/kitakaze/dmoj/problems'
-124: STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
+49:  DMOJ_PROBLEM_DATA_ROOT = '/home/root/dmoj/problems'
+124: STATIC_ROOT = '/home/root/dmoj/site/static'
 ```
 
 ## モジュールのインストール
@@ -129,9 +129,27 @@ python3 manage.py loaddata demo
 ```
 
 ## uWSGIのセットアップ
+site.conf, bridged.confのユーザ名`root`の部分を自分のユーザー名に書き換えてください。
+### site.conf  
+```
+2:  command=uwsgi --ini /home/root/dmoj/site/uwsgi.ini
+3:  directory=/home/root/dmoj/site
+6:  user=root
+7:  group=root
+```
+### bridged.conf
+```
+3:  directory=/home/root/dmoj/site
+6:  user=root
+7:  group=root
+```
+### uwsgi.ini
+```
+8:  uid = root
+9:  gid = root
+12: chdir = /home/root/dmoj/site
+```
 uwsgiをインストールし、設定ファイルをコピーします。  
-**site.conf,bridged.confの２・３行目にあるホームディレクトリのパスの"kitakaze"の部分を自分のユーザー名に書き換えてください。**  
-**また、uwsgi.iniの12行目も同じく変更してください。**
 ```
 sudo pip3 install uwsgi
 sudo cp site.conf bridged.conf /etc/supervisor/conf.d/
@@ -139,9 +157,12 @@ sudo cp site.conf bridged.conf /etc/supervisor/conf.d/
 
 
 ## nginxのセットアップ
-nginx.confを修正して、下のコマンドで`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
-**ファイル内の21行目、25行目、40行目のパスの"kitakaze"の部分を自分のユーザー名に書き換えてください。**
-
+nginx.conf野以下の部分を修正して、下のコマンドで`/etc/nginx/sites-enabled`に配置します。そのパスには`default`というファイルがあるため今回はファイル名を`default`として、上書きコピーしています。  
+```
+21: root /home/root/dmoj/site;
+25: root /home/root/dmoj/site/resources/icons;
+40: root /home/root/dmoj/site;
+```
 ```
 sudo cp nginx.conf /etc/nginx/sites-enabled/default
 sudo service nginx reload
@@ -154,8 +175,13 @@ config.jsをwebsocketフォルダに配置し、必要なパッケージをイ�
 cp config.js websocket/
 sudo npm install qu ws simplesets
 ```
-また、wsevent.confをsupervisorにコピーして supervisordを再起動します。  
-**wsevent.confの２・３行目のフォルダパスを直してください。**
+また、修正したwsevent.confをsupervisorにコピーして supervisordを再起動します。  
+```
+2:  command=/usr/bin/node /home/root/dmoj/site/websocket/daemon.js
+3:  environment=NODE_PATH="/home/root/dmoj/site/node_modules"
+6:  user=root
+7:  group=root
+```
 ```
 sudo cp wsevent.conf /etc/supervisor/conf.d/
 ```
