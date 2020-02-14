@@ -1,8 +1,22 @@
 # Siteのセットアップ
+## Mariadbのリポジトリ追加
+https://downloads.mariadb.org/mariadb/repositories/ にアクセスします。  
+それぞれの項目は、次のように選択します。
+1. Choose a Distro: Ubuntu
+1. Choose a Release: 自分の使用しているバージョン（画像では18.04）
+1. Choose a Version: Stableと書いてあるバージョン（画像では10.4）
+1. Choose a Mirror: 日本のサーバ（画像では山形大学）
+
+![mariadb](images/mariadb.png)
+
+すべて選択し終わったら、画面下の`Here are the commands to run to install MariaDB 10.4 from the MariaDB repository on your Ubuntu system:`に書いてあるコマンドで、リポジトリを追加し、さらに次のコマンドで反映させます。
+```sh
+sudo apt update
+```
 ## 必要なパッケージのダウンロード
 必要なソフトウェアをすべてダウンロードします。[*](https://github.com/DMOJ/site/issues/816)
 ```
-sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mysql-server libmysqlclient-dev supervisor nginx memcached
+sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mariadb-server libmysqlclient-dev supervisor nginx memcached
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン12を使用します。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
@@ -25,18 +39,19 @@ sudo npm install -g --unsafe-perm=true sass pleeease-cli
 sudo mysql_secure_installation
 ``` 
 起動すると、
-> Would you like to setup VALIDATE PASSWORD plugin?
+> Set root password?
 
-と聞かれるので、nキーを押して拒否します。 
+と聞かれるので、yキーを押して許可します。 
 
 新しいパスワードの入力を求められるので、パスワードを決め、入力する。（ここでは、`dmoj`としました。）  
 再度パスワードを入力し、エンターを押す。
+下記の質問には、yキーで許可する。
+
 > Remove anonymous users?  
 Disallow root login remotely?  
 Remove test database and access to it?  
 Reload privilege tables now?  
 
-上記の質問には、yキーで許可する。
 
 ## データベースの設定
 まずは、下記のコマンドで、MySQLサーバにログインする。（先ほど設定したパスワードを入力）
