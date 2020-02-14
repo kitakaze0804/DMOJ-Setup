@@ -56,7 +56,7 @@ http://localhost に移動して、上のメニューから`problem`を選択し
 ~/dmoj/docs/problem_examples/standard/aplusb  
 ![image6](images/judge_connection6.png)  
 
-ファイルを選択した状態で一度、`Submit`ボタンを押します。そのあとは、写真の通りにテストケースを設定します。右下にある`add new case`をクリックすると、テストケースを追加することができます。  
+ファイルを選択した状態で一度、`Submit`ボタンを押します。そのあとは、写真の通りにテストケースを設定します。左下にある`add new case`をクリックすると、テストケースを追加することができます。  
 ![image7](images/judge_connection7.png)  
 
 再びSubmitをして問題ページに戻ると、Judgeのところに`ExampleJudge`と表示されるはずです。  
