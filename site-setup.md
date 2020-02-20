@@ -90,7 +90,7 @@ mkdir ~/dmoj/problems
 - [config.js](setting-files/config.js)
 - [wsevent.conf](setting-files/wsevent.conf)
 
-また、[local_settings.py](setting-files/local_settings.py)を`~/dmoj/site/dmoj/に配置し、ファイル内の`root`の部分を自分のユーザー名に変更してください。[*](https://github.com/DMOJ/site/issues/1037)
+また、[local_settings.py](setting-files/local_settings.py)を`~/dmoj/site/dmoj/`に配置し、ファイル内の`root`の部分を自分のユーザー名に変更してください。[*](https://github.com/DMOJ/site/issues/1037)
 ```
 49:  DMOJ_PROBLEM_DATA_ROOT = '/home/root/dmoj/problems'
 124: STATIC_ROOT = '/home/root/dmoj/site/static'
