@@ -105,7 +105,6 @@ mkdir ~/dmoj/problems
 ```
 sudo pip3 install -r requirements.txt
 sudo pip3 install mysqlclient websocket-client sqlparse
-sudo pip3 install django_select2==6.3.1
 sudo pip3 install python-memcached
 python3 manage.py check
 ```

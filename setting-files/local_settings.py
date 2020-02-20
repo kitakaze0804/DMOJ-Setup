@@ -21,7 +21,6 @@ ALLOWED_HOSTS = ['*']
 
 # Optional apps that DMOJ can make use of.
 INSTALLED_APPS += (
-    'django_select2',
 )
 
 # Caching. You can use memcached or redis instead.
@@ -36,7 +35,7 @@ CACHES = {
 # Your database credentials. Only MySQL is supported by DMOJ.
 # Documentation: <https://docs.djangoproject.com/en/1.11/ref/databases/>
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dmoj',
         'USER': 'dmoj',
@@ -61,7 +60,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-## django-compressor settings, for speeding up page load times by minifying CSS and JavaScript files.
+# django-compressor settings, for speeding up page load times by minifying CSS and JavaScript files.
 # Documentation: https://django-compressor.readthedocs.io/en/latest/
 COMPRESS_OUTPUT_DIR = 'cache'
 COMPRESS_CSS_FILTERS = [
@@ -77,13 +76,13 @@ STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 ########## Email configuration ##########
 #########################################
 # See <https://docs.djangoproject.com/en/1.11/topics/email/#email-backends>
-# for more documentation. You should follow the information there to define 
+# for more documentation. You should follow the information there to define
 # your email settings.
 
 # Use this if you are just testing.
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# The following block is included for your convenience, if you want 
+# The following block is included for your convenience, if you want
 # to use Gmail.
 #EMAIL_USE_TLS = True
 #EMAIL_HOST = 'smtp.gmail.com'
@@ -119,8 +118,8 @@ SERVER_EMAIL = 'Don Mills Online Judge <errors@dmoj.ca>'
 ##################################################
 # See <https://docs.djangoproject.com/en/1.11/howto/static-files/>.
 
-# Change this to somewhere more permanent., especially if you are using a 
-# webserver to serve the static files. This is the directory where all the 
+# Change this to somewhere more permanent., especially if you are using a
+# webserver to serve the static files. This is the directory where all the
 # static files DMOJ uses will be collected to.
 # You must configure your webserver to serve this directory as /static/ in production.
 STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
@@ -135,22 +134,22 @@ STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
 ########## DMOJ-specific settings ##########
 ############################################
 
-## DMOJ site display settings.
+# DMOJ site display settings.
 SITE_NAME = 'DMOJ'
 SITE_LONG_NAME = 'Don Mills Online Judge'
 SITE_ADMIN_EMAIL = 'admin@example.com'
-TERMS_OF_SERVICE_URL = '//dmoj.ca/tos' # Use a flatpage.
+TERMS_OF_SERVICE_URL = '//dmoj.ca/tos'  # Use a flatpage.
 
-## Bridge controls.
+# Bridge controls.
 # The judge connection address and port; where the judges will connect to the site.
-# You should change this to something your judges can actually connect to 
+# You should change this to something your judges can actually connect to
 # (e.g., a port that is unused and unblocked by a firewall).
 BRIDGED_JUDGE_ADDRESS = [('0.0.0.0', 9999)]
 
 # The bridged daemon bind address and port to communicate with the site.
 BRIDGED_DJANGO_ADDRESS = [('0.0.0.0', 9998)]
 
-## DMOJ features.
+# DMOJ features.
 # Set to True to enable full-text searching for problems.
 ENABLE_FTS = True
 
@@ -162,7 +161,7 @@ BAD_MAIL_PROVIDERS = set()
 # Uncomment to change the submission limit.
 #REJUDGE_SUBMISSION_LIMIT = 10
 
-## Event server.
+# Event server.
 # Uncomment to enable live updating.
 EVENT_DAEMON_USE = True
 
@@ -181,7 +180,7 @@ EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
 
 # Using our standard nginx configuration, these should be.
 EVENT_DAEMON_GET = 'ws://127.0.0.1/event/'
-#EVENT_DAEMON_GET_SSL = 'wss://host/event/'  # Optional
+# EVENT_DAEMON_GET_SSL = 'wss://host/event/'  # Optional
 EVENT_DAEMON_POLL = '/channels/'
 
 # If you would like to use the AMQP-based event server from <https://github.com/DMOJ/event-server>,
@@ -190,7 +189,7 @@ EVENT_DAEMON_POLL = '/channels/'
 #EVENT_DAEMON_AMQP = '<amqp:// URL to connect to, including username and password>'
 #EVENT_DAEMON_AMQP_EXCHANGE = '<AMQP exchange to use>'
 
-## CDN control.
+# CDN control.
 # Base URL for a copy of ace editor.
 # Should contain ace.js, along with mode-*.js.
 ACE_URL = '//cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/'
@@ -202,7 +201,7 @@ SELECT2_CSS_URL = '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.mi
 # Please try not to hotlink this poor site.
 TIMEZONE_MAP = 'http://naturalearth.springercarto.com/ne3_data/8192/textures/3_no_ice_clouds_8k.jpg'
 
-## Camo (https://github.com/atmos/camo) usage.
+# Camo (https://github.com/atmos/camo) usage.
 #CAMO_URL = "<URL to your camo install>"
 #CAMO_KEY = "<The CAMO_KEY environmental variable you used>"
 
@@ -219,7 +218,7 @@ TIMEZONE_MAP = 'http://naturalearth.springercarto.com/ne3_data/8192/textures/3_n
 # Set to 2 to make https URLs canonical.
 #DMOJ_HTTPS = 0
 
-## PDF rendering settings.
+# PDF rendering settings.
 # Directory to cache the PDF.
 #PROBLEM_PDF_CACHE = '/home/dmoj-uwsgi/pdfcache'
 
@@ -235,7 +234,7 @@ TIMEZONE_MAP = 'http://naturalearth.springercarto.com/ne3_data/8192/textures/3_n
 
 # Note that PhantomJS is preferred over wkhtmltopdf and would be used when both are defined.
 
-## ======== Logging Settings ========
+# ======== Logging Settings ========
 # Documentation: https://docs.djangoproject.com/en/1.9/ref/settings/#logging
 #                https://docs.python.org/2/library/logging.config.html#logging-config-dictschema
 LOGGING = {
@@ -295,8 +294,8 @@ LOGGING = {
     },
 }
 
-## ======== Integration Settings ========
-## Python Social Auth
+# ======== Integration Settings ========
+# Python Social Auth
 # Documentation: https://python-social-auth.readthedocs.io/en/latest/
 # You can define these to enable authentication through the following services.
 #SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
@@ -308,6 +307,6 @@ LOGGING = {
 #SOCIAL_AUTH_DROPBOX_OAUTH2_KEY = ''
 #SOCIAL_AUTH_DROPBOX_OAUTH2_SECRET = ''
 
-## ======== Custom Configuration ========
+# ======== Custom Configuration ========
 # You may add whatever django configuration you would like here.
 # Do try to keep it separate so you can quickly patch in new settings.
