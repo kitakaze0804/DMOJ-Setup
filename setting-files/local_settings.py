@@ -47,7 +47,7 @@ DATABASES = {
         },
     }
 }
-DMOJ_PROBLEM_DATA_ROOT = '/home/kitakaze/dmoj/problems'
+DMOJ_PROBLEM_DATA_ROOT = '/home/root/dmoj/problems'
 # Sessions.
 # Documentation: <https://docs.djangoproject.com/en/1.11/topics/http/sessions/>
 #SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
@@ -110,7 +110,7 @@ ADMINS = (
 )
 
 # The sender for the aforementioned emails.
-SERVER_EMAIL = 'Don Mills Online Judge <errors@dmoj.ca>'
+SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
 
 
 ##################################################
@@ -122,7 +122,7 @@ SERVER_EMAIL = 'Don Mills Online Judge <errors@dmoj.ca>'
 # webserver to serve the static files. This is the directory where all the
 # static files DMOJ uses will be collected to.
 # You must configure your webserver to serve this directory as /static/ in production.
-STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
+STATIC_ROOT = '/home/root/dmoj/site/static'
 
 # URL to access static files.
 #STATIC_URL = '/static/'
@@ -136,7 +136,7 @@ STATIC_ROOT = '/home/kitakaze/dmoj/site/static'
 
 # DMOJ site display settings.
 SITE_NAME = 'DMOJ'
-SITE_LONG_NAME = 'Don Mills Online Judge'
+SITE_LONG_NAME = 'DMOJ: Modern Online Judge'
 SITE_ADMIN_EMAIL = 'admin@example.com'
 TERMS_OF_SERVICE_URL = '//dmoj.ca/tos'  # Use a flatpage.
 
