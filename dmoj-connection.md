@@ -3,16 +3,19 @@
 
 ## judge.ymlのダウンロードと修正
 [judge.yml](setting-files/judge.yml)を`~/dmoj/judge`にダウンロードします。  
-４行目の`root`を自分のユーザー名に変更します。
+４行目の`username`を自分のユーザー名に変更します。
 ```
 3: problem_storage_root: 
-4:   - /home/root/dmoj/problems
+4:   - /home/username/dmoj/problems
 ```
 ## 設定ファイルの修正とコピー
 [dmoj.conf](setting-files/dmoj.conf)を`~/dmoj/judge`直下に置きます。  
-2行目にある`root`を自分のユーザー名に変更します。
+次の行にある`username`を自分のユーザー名に変更します。
 ```
-2: command=dmoj -c /home/root/dmoj/judge/judge.yml 127.0.0.1
+2: command=dmoj -c /home/username/dmoj/judge/judge.yml 127.0.0.1
+3: directory=/home/username/dmoj/judge
+6: user=username
+7: group=username
 ```
 Supervisorにコピーして再起動します。
 ```

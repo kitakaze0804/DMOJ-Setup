@@ -6,7 +6,7 @@ siteフォルダに移動して、次のコマンドで更新します。
 cd ~/dmoj/site
 git pull origin master
 ```
-もし、新しいモジュールが追加された場合は、requirements.txtでインストールしてください。
+もし、requirements.txtに新しいモジュールが追加された場合は、次のコマンドでインストールしてください。
 ```
 sudo pip3 install -r requirements.txt
 ```

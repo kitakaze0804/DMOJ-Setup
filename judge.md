@@ -4,7 +4,7 @@ Judgeは比較的簡単にセットアップできます。
 ## ソースコードのダウンロード
 ```
 cd ~/dmoj
-git clone https://github.com/DMOJ/judge
+git clone https://github.com/DMOJ/judge-server.git judge
 cd judge
 git submodule init
 git submodule update

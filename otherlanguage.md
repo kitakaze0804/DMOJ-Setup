@@ -30,9 +30,9 @@ http://localhost/admin/judge/language にアクセスして、左上の`Add`ボ�
 - Ace mode name
     - Ace Editorのハイライト表示に使用する言語を記入します。Common nameの先頭を小文字にしたものでよいと思います。ここでは、`java`としました。
 - Pygments name
-    - Siteのソースコード画面に表示する名前。ユーザーに分かりやすい名前にする必要があります。ここでは、`Java 11`としました。
+    - ソースコード入力画面で強調表示するための設定。ここでは、`java`としました。
 - Runtime info override
-    - どのようなコンパイラやインタプリタを使用しているのか簡単に記入します。ここでは、`OpenJDK-11.0.4`としました。
+    - どのようなコンパイラやインタプリタを使用しているのか記入できますが、必須ではありません。ここでは空欄にします。
 
 すべて登録できたら、下にある`Save`ボタンを押して、保存します。
 
@@ -40,6 +40,7 @@ http://localhost/admin/judge/language にアクセスして、左上の`Add`ボ�
 `runtime:`の最後に追記します。Javaの場合はJDKとJREの両方を追加する必要があるみたいです。
 ```yml
 runtime:
+  ...
   java11: /usr/bin/java
   javac11: /usr/bin/javac
 ```
