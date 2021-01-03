@@ -211,6 +211,7 @@ celery.confのusernameを変更し、supervisordのフォルダーにコピー�
 ```
 ```
 sudo cp celery.conf /etc/supervisor/conf.d/
+sudo supervisorctl reload
 ```
 
 次のコマンドで、正常に動作するか確認します。
