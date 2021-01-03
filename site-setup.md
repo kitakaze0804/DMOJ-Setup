@@ -1,11 +1,18 @@
 # Siteのセットアップ
+## dmoj用ユーザーの追加
+次の手順でDMOJ動作用のユーザーを追加し、sudo権限を与えます。
+```
+sudo useradd dmoj
+sudo gpasswd -a dmoj sudo
+```
 ## Mariadbのリポジトリ追加
 https://downloads.mariadb.org/mariadb/repositories/ にアクセスします。  
 それぞれの項目は、次のように選択します。
 1. Choose a Distro: Ubuntu
 1. Choose a Release: 自分の使用しているバージョン（画像では20.04）
 1. Choose a Version: 最新（一番上）のバージョン（画像では10.5）
-1. Choose a Mirror: 日本のサーバ（画像では山形大学）
+1. Choose a Mirror: 日本のサーバ（画像では山形大学）  
+※日本のサーバでなくてもよい
 
 ![mariadb](images/mariadb.png)
 
@@ -14,25 +21,17 @@ https://downloads.mariadb.org/mariadb/repositories/ にアクセスします。
 sudo apt update
 ```
 ## 必要なパッケージのダウンロード
-必要なソフトウェアをすべてダウンロードします。[*](https://github.com/DMOJ/site/issues/816)
+必要なソフトウェアをすべてダウンロードします。
 ```
-sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mariadb-server libmysqlclient-dev supervisor nginx memcached
+sudo apt install -y git gcc g++ make python3-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3-pip mariadb-server libmysqlclient-dev supervisor nginx redis-server
 ```
 ## Nodejsのダウンロードとインストール
 ここでは、バージョン12を使用します。また、`npm`で追加で必要なパッケージもインストールしてしまいます。
 ```
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install -y nodejs
-sudo npm install -g  sass postcss-cli autoprefixer
+sudo npm install -g sass postcss postcss-cli autoprefixer
 ```
-<!--
-古い方法
-```
-wget -O- https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt install -y nodejs
-sudo npm install -g --unsafe-perm=true sass pleeease-cli
-```
--->
 ## MySQLの設定
 必ずスーパーユーザーとして実行してください。
 ```
@@ -98,6 +97,7 @@ mkdir ~/dmoj/problems
 - [nginx.conf](setting-files/nginx.conf)
 - [config.js](setting-files/config.js)
 - [wsevent.conf](setting-files/wsevent.conf)
+- [celery.conf](setting-files/celery.conf)
 
 また、[local_settings.py](setting-files/local_settings.py)を`~/dmoj/site/dmoj/`に配置し、ファイル内の`username`の部分を自分のユーザー名に変更してください。[*](https://github.com/DMOJ/site/issues/1037)
 ```
@@ -107,19 +107,19 @@ mkdir ~/dmoj/problems
 
 ## モジュールのインストール
 次はモジュールをインストールします。必ず`sudo`で実行することと、`pip`ではなくて、`pip3`を使うようにしましょう。
-<!--古い情報
-### 注意
-2019/9/19現在、requirements.txtにある`django-pagedown`をそのままインストールすると、`django-pagedown2.0.3`がインストールされ、正常に動きません。そこで、requirements.txtの４行目にある`django-pagedown`を`django-pagedown==1.0.6`に変更してください。[*](https://pypi.org/project/django-pagedown/)
--->
 ```
 sudo pip3 install -r requirements.txt
-sudo pip3 install mysqlclient websocket-client sqlparse
-sudo pip3 install python-memcached
+sudo pip3 install mysqlclient websocket-client
 python3 manage.py check
 ```
 最後のコマンドは**sudoをつけずに**実行します。エラーが出なければ成功です。
 ## サイトのコンパイル
-以下のコマンドで、スタイルシートをコンパイルします。
+最初に以下のコマンドでsrcフォルダの書き込み権限を変更します。（エラー対策）
+```
+sudo chmod -R 777 src/
+```
+
+次に、以下のコマンドで、スタイルシートをコンパイルします。
 ```
 ./make_style.sh 
 python3 manage.py collectstatic
@@ -142,19 +142,13 @@ site.conf, bridged.confのユーザ名`username`の部分を自分のユーザ�
 ```
 2:  command=uwsgi --ini /home/username/dmoj/site/uwsgi.ini
 3:  directory=/home/username/dmoj/site
-6:  user=username
-7:  group=username
 ```
 ### bridged.conf
 ```
 3:  directory=/home/username/dmoj/site
-6:  user=username
-7:  group=username
 ```
 ### uwsgi.ini
 ```
-8:  uid = username
-9:  gid = username
 12: chdir = /home/username/dmoj/site
 ```
 uwsgiをインストールし、設定ファイルをコピーします。  
@@ -187,8 +181,6 @@ sudo npm install qu ws simplesets
 ```
 2:  command=/usr/bin/node /home/username/dmoj/site/websocket/daemon.js
 3:  environment=NODE_PATH="/home/username/dmoj/site/node_modules"
-5:  user=username
-6:  group=username
 ```
 ```
 sudo cp wsevent.conf /etc/supervisor/conf.d/
@@ -209,6 +201,27 @@ statusがRUNNINGとなっていたら、正常です。
 python3 manage.py createsuperuser
 sudo service nginx restart
 sudo supervisorctl reload
+```
+
+## Celeryの起動
+新たにCeleryが使われるようになりました。  
+celery.confのusernameを変更し、supervisordのフォルダーにコピーします。
+```
+3:  directory=/home/username/dmoj/site
+```
+```
+sudo cp celery.conf /etc/supervisor/conf.d/
+```
+
+次のコマンドで、正常に動作するか確認します。
+```
+sudo service redis-server start
+celery -A dmoj_celery worker
+```
+
+もし、上記コマンドでエラーが出た場合は、以下のモジュールをインストールしてください。
+```
+sudo pip3 install django-redis
 ```
 
 ## サイトの確認

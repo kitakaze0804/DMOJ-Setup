@@ -54,7 +54,7 @@ DMOJ_PROBLEM_DATA_ROOT = '/home/username/dmoj/problems'
 
 # Internationalization.
 # Documentation: <https://docs.djangoproject.com/en/1.11/topics/i18n/>
-LANGUAGE_CODE = 'en-ca'
+LANGUAGE_CODE = 'ja'
 DEFAULT_USER_TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_L10N = True
