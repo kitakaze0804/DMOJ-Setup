@@ -1,5 +1,5 @@
 # Siteのセットアップ
-## dmoj用ユーザーの追加
+## DMOJ用ユーザーの追加
 次の手順でDMOJ動作用のユーザーを追加し、sudo権限を与えます。
 ```
 sudo useradd dmoj
@@ -204,17 +204,12 @@ sudo supervisorctl reload
 ```
 
 ## Celeryの起動
-新たにCeleryが使われるようになりました。  
-celery.confのusernameを変更し、supervisordのフォルダーにコピーします。
-```
-3:  directory=/home/username/dmoj/site
-```
-```
-sudo cp celery.conf /etc/supervisor/conf.d/
-sudo supervisorctl reload
-```
-
+新たにCeleryが使われるようになりました。
+ 
 次のコマンドで、正常に動作するか確認します。
+Warningは無視してよいです。  
+（コマンドを中止するときは、`Ctrl+C`）
+
 ```
 sudo service redis-server start
 celery -A dmoj_celery worker
@@ -224,6 +219,16 @@ celery -A dmoj_celery worker
 ```
 sudo pip3 install django-redis
 ```
+
+動作確認ができたら、celery.confのusernameを変更し、supervisordのフォルダーにコピーします。
+```
+3:  directory=/home/username/dmoj/site
+```
+```
+sudo cp celery.conf /etc/supervisor/conf.d/
+sudo supervisorctl reload
+```
+
 
 ## サイトの確認
 webブラウザを開き、アドレスバーに http://localhost （127.0.0.1と同じ）と入力します。サイトが表示されれば成功！  
